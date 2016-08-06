@@ -1,0 +1,52 @@
+Introduction
+------------
+
+The Worth Data Connection Host is a web based system that serves to route or "broker" communication 
+between Worth Data 7802 WiFi Terminals and an Application Server.
+
+The Connection Host is installed on a standard web server, easily available on a subscription basis
+from a website hosting provider.
+
+The Connection Host requires a web server capable of handling PHP 5 and that has MySQL database 
+server installed. Most web hosting service providers include these features by default.
+
+Installing this system (the Web-based Connection Host) requires an operational knowledge of running web servers, MySQL (using 
+something like phpMyAdmin), and a basic understanding of CGI scripting (PHP in specific).
+
+There is also a Windows version of the Connection Host that is a self-contain program (does not require a web server) and is
+intended to run on a LAN and serve local, LAN based (not internet-based) terminals and host application. Please see your manual 
+for more information on the Windows based Connection Host program.
+ 
+
+
+The Connection Host is composed of three parts:
+-----------------------------------------------
+ 
+  1. The "server.php" script which is the web page that the Application Server uses.
+  2. The "terminal.php" script which is the web page that the 7802 Terminals use.
+  3. A set of four tables ("fromterminal", "fromserver", "messages", "serverinit"), and an 
+	 optional two more ("serverlog", "terminallog") stored in the MySQL database of your choice.
+ 
+ The database tables are only used for transient storage and will never accumulate a significant 
+ quantity of data in normal use (except the log tables, if you use them).
+
+
+ 
+The Connection Host is installed by:
+------------------------------------
+ 
+      -Copy the included PHP and INC files to a folder on your web hosting server (use your usual 
+      FTP client for this). These can be copied to the main folder of your website, or to a subfolder.
+      
+      -Edit the "varstermrouter.inc" file. 
+      Notice that "install.php" and "server.php" and "terminal.php" all use the file "varstermrouter.inc". 
+      This file needs to be edited to contain the correct connection and password data for your database.
+      You may want to put it in a restricted access folder as a security measure (don't forget to change 
+      the "includes" in the other files if you do).  
+      
+      -Build the necessary MySQL database tables. 
+      Either run this installer by pointing your web browser to
+      http://www.myWebsite/myConnectionHostFolder/install.php
+      or use the included DDL (database definition log) file to build the tables manually using the 
+      software tools provided by your web hosting provider.
+ 
